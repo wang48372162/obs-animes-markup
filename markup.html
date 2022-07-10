@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    overflow: hidden;
+  }
+  .list {
+    display: flex;
+    padding: 8px 4px;
+    overflow: hidden;
+  }
+  .list-item {
+    color: #ffffff;
+    opacity: .5;
+    font-size: 20px;
+    padding: 0 4px;
+    white-space: nowrap;
+  }
+  .active {
+    opacity: 1;
+    font-weight: bold;
+  }
+  </style>
+</head>
+<body>
+  <div class="list"></div>
+
+  <script>
+  const alias = ALIAS
+  const list = new Proxy([], {
+    get(target, name, value) {
+      const prop = Reflect.get(target, name)
+      function updateListDomOnMethodCalled(prop) {
+        return new Proxy(prop, {
+          apply(pTarget, pObject, pArgs) {
+            const result = Reflect.apply(pTarget, pObject, pArgs)
+            updateListDom(pObject)
+            return result
+          },
+        })
+      }
+      function updateListDomOnPushItemMethodCalled(prop) {
+        return new Proxy(prop, {
+          apply(pTarget, pObject, pArgs) {
+            const exists = pArgs[0] ? pObject.includes(pArgs[0]) : false
+            if (!exists) {
+              const result = Reflect.apply(pTarget, pObject, pArgs)
+              updateListDom(pObject)
+              return result
+            }
+            return Reflect.get(pObject, 'length')
+          },
+        })
+      }
+      switch (name) {
+        case 'push':
+          return updateListDomOnPushItemMethodCalled(prop)
+        case 'unshift':
+          return updateListDomOnPushItemMethodCalled(prop)
+        case 'pop':
+          return updateListDomOnMethodCalled(prop)
+        case 'shift':
+          return updateListDomOnMethodCalled(prop)
+        case 'splice':
+          return updateListDomOnMethodCalled(prop)
+      }
+      return prop
+    },
+  })
+
+  function updateListDom(list) {
+    const listEl = document.querySelector('.list')
+    listEl.innerHTML = list.map((text, i) => {
+      text = alias[text] || text
+      return `<div class="list-item${i === list.length - 1 ? ' active' : ''}">${text}</div>`
+    }).join('')
+    listEl.scrollLeft = listEl.scrollWidth
+  }
+
+  document.addEventListener('DOMContentLoaded', event => {
+    const ws = new WebSocket('ws://localhost:2233')
+    ws.onmessage = event => {
+      const text = event.data
+      list.push(text)
+      console.log(text)
+    }
+  })
+
+  window.addEventListener('load', () => {
+    updateListDom(list)
+  })
+  </script>
+</body>
+</html>
