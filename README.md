@@ -51,3 +51,17 @@ module.exports = {
   '欢迎来到实力至上主义的教室 第2期': '实教',
 }
 ```
+
+除了讀本地的之外，它還會自動抓取雲端程式倉庫的 [`upstream/alias.json`](https://github.com/wang48372162/obs-animes-markup/blob/main/upstream/alias.json)，不過本地的權限比較高，如果不滿意雲端的翻譯要修改的話，可以直接在本地新增同名的別名即可：
+
+```js
+// 雲端 upstream/alias.json:
+{
+  "继母的女儿是我的前女友": "继母的拖油瓶是我的前女友"
+}
+
+// 本地 alias.js:
+module.exports = {
+  '继母的女儿是我的前女友': '拖油瓶', // 最後會顯示本地的「拖油瓶」別名
+}
+```

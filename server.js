@@ -1,5 +1,6 @@
 const fs = require('fs')
 const net = require('net')
+const axios = require('axios').default
 const express = require('express')
 const SocketServer = require('ws').Server
 const alias = require('./alias')
@@ -7,10 +8,11 @@ const alias = require('./alias')
 async function createServer() {
   const app = express()
   const port = await findFreePort(2233)
+  const upstream_alias = await fetchUpstreamAlias()
 
   app.get('/', (req, res) => {
     let html = fs.readFileSync('markup.html', { encoding: 'utf-8' })
-    html = html.replace('ALIAS', JSON.stringify(alias))
+    html = html.replace('ALIAS', JSON.stringify(Object.assign(upstream_alias, alias)))
     res.send(html)
   })
 
@@ -40,6 +42,18 @@ async function createServer() {
 }
 
 createServer()
+
+function fetchUpstreamAlias() {
+  return new Promise(resolve => {
+    axios.get('https://raw.githubusercontent.com/wang48372162/obs-animes-markup/main/upstream/alias.json')
+      .then(({ data }) => {
+        resolve(data)
+      })
+      .catch(() => {
+        resolve({})
+      })
+  })
+}
 
 function isPortFree(port) {
   return new Promise(resolve => {
