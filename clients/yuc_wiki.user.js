@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         OBS 直播標記動漫 for YuC
-// @namespace    wang48372162
+// @name         OBS 直播標記動漫 - yuc.wiki
+// @namespace    https://github.com/wang48372162/obs-animes-markup
 // @version      0.1.0
-// @description  OBS 直播標記動漫 for YuC's AnimeList
+// @description  OBS 直播標記動漫 - yuc.wiki
 // @author       wang48372162
 // @match        https://yuc.wiki/*
 // @icon         https://yuc.wiki/images/32x32.png
