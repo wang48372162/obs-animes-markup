@@ -69,3 +69,7 @@ module.exports = {
   '继母的女儿是我的前女友': '拖油瓶', // 最後會顯示本地的「拖油瓶」別名
 }
 ```
+
+## License
+
+Under the [MIT License](LICENSE)
