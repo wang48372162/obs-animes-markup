@@ -12,7 +12,7 @@ npm install
 
 客戶端 (需要先安裝 Tampermonkey 油猴腳本)：
 
-* YuC's AnimeList (yuc.wiki) - [點擊安裝](https://raw.githubusercontent.com/wang48372162/obs-animes-markup/main/clients/yuc_wiki.user.js)
+* YuC's AnimeList ([yuc.wiki](https://yuc.wiki/)) - [點擊安裝](https://raw.githubusercontent.com/wang48372162/obs-animes-markup/main/clients/yuc_wiki.user.js)
 
 ## 使用
 
@@ -35,3 +35,19 @@ npm run start
 ![](screens/screenshot_02.jpg)
 
 > **Warning**: 直播頁面上方的區塊以及 yuc.wiki 頁面中的打勾，都是重新整理頁面就會清空，需要注意。
+
+## 別名
+
+在 `alias.js` 中可以定義番劇名稱的縮寫，讓直播畫面顯示比較短的別名，既可以讓畫面比較簡潔，又可以顯示熟悉的譯名。
+
+比如在 yuc.wiki 中「继母的女儿是我的前女友」比較常念另一個翻譯「拖油瓶」，就可以在 `alias.js` 裡定義：
+
+```js
+module.exports = {
+  // 'yuc.wiki 上顯示的名稱': '這裡就寫喜歡的譯名',
+  '继母的女儿是我的前女友': '拖油瓶',
+  '异世界归来的舅舅': '异世界舅舅',
+  'RWBY冰雪帝国': 'RWBY',
+  '欢迎来到实力至上主义的教室 第2期': '实教',
+}
+```
