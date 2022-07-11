@@ -28,7 +28,7 @@ npm run start
 
 ![](screens/screenshot_01.jpg)
 
-*※ 部份畫面截圖自 [【泛式/录播】七月新番杂谈回，你也很想看粉毛切片对吧？](https://www.bilibili.com/video/BV1nZ4y1Y7VH)*
+*※ 畫面中有部份擷取自 [【泛式/录播】七月新番杂谈回，你也很想看粉毛切片对吧？](https://www.bilibili.com/video/BV1nZ4y1Y7VH)*
 
 之後只要在講到某部番劇時，**雙擊黑色標題區塊**，右上角將會出現打勾標記，以及直播頁面上方「瀏覽器」來源處會自動更新番劇名稱：
 
