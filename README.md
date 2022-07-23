@@ -24,7 +24,7 @@ npm run start
 
 在啟動伺服器之後要刷新 yuc.wiki 頁面。
 
-開啟 OBS，新增一個「瀏覽器」來源，網址處貼上，「http://localhost:2233」，寬度「1200」，高度「40」，清空自訂CSS，最後調整成以下位置及大小即可：
+開啟 OBS，新增一個「瀏覽器」來源，網址處貼上，「[http://localhost:2233/](http://localhost:2233/)」，寬度「1200」，高度「40」，清空自訂CSS，最後調整成以下位置及大小即可：
 
 ![](screens/screenshot_01.jpg)
 
